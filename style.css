@@ -5,75 +5,83 @@
 }
 
 body, html {
-    height: 100vh;
+    /* Changed from 100vh/hidden to allow scrolling on small devices */
+    min-height: 100vh;
     margin: 0;
-    overflow: hidden; /* Prevents scrolling */
+    overflow-x: hidden; 
+    overflow-y: auto; 
     background-color: #f4f7f6;
     font-family: 'Segoe UI', sans-serif;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* Better for scrolling than center */
+    padding: 10px 0; /* Adds breathing room at top/bottom */
+    box-sizing: border-box;
 }
 
 .app-container {
-    height: auto; /* Fits within 95% of screen height */
+    height: auto; 
     width: 95%;
     max-width: 800px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Spreads content vertically */
+    justify-content: space-between; 
     padding: 10px;
     box-sizing: border-box;
 }
 
-header { text-align: center; margin-bottom: 5px; }
+header { text-align: center; margin-bottom: 10px; }
 header h1 { margin: 0; font-size: 1.5rem; color: var(--navy); }
-header p { margin: 2px 0; font-size: 0.8rem; color: #666; }
+header p { margin: 4px 0; font-size: 0.8rem; color: #666; }
 
 .flex-layout {
     display: flex;
     flex-wrap: wrap;
-    gap: 2%;
-    flex: 1; /* Takes available space */
+    gap: 15px; /* Switched to px for more predictable mobile spacing */
+    flex: 1; 
 }
 
 .card {
     background: var(--white);
-    margin: .5rem 0;
-    padding: 12px;
+    margin: 0; /* Margin handled by flex-layout gap */
+    padding: 15px;
     border-radius: 12px;
     box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-    flex: 1 1 calc(50% - 20px);
+    /* Default to 50% width on Desktop */
+    flex: 1 1 calc(50% - 15px);
     box-sizing: border-box;
 }
 
 .session3 {
-    & div{
-        flex-grow: 1;
-    }
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
     width: 100%;
-    gap: 1%;
-    flex: 1; /* Takes available space */
+    gap: 10px;
+    flex: 1; 
+}
+
+.session3 > div {
+    flex: 1 1 calc(50% - 10px); /* Side-by-side inside the card on desktop */
 }
 
 .card h2 {
-    font-size: 0.7rem;
-    margin: 0 0 1% 0;
+    font-size: 0.75rem;
+    margin: 0 0 10px 0;
     color: #999;
     border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
 }
 
-.input-group { margin-bottom: 8px; }
+.input-group { margin-bottom: 12px; }
 
-label { font-size: 0.75rem; font-weight: 600; display: block; margin-bottom: 2px; }
+label { font-size: 0.8rem; font-weight: 600; display: block; margin-bottom: 4px; }
 
+/* Increased padding slightly for easier finger tapping on mobile */
 input, select {
     width: 100%;
-    padding: 6px;
-    font-size: 0.85rem;
+    padding: 8px;
+    font-size: 0.9rem; /* Slightly larger to prevent iOS auto-zoom */
     border: 1px solid #ddd;
     border-radius: 4px;
     box-sizing: border-box;
@@ -81,25 +89,48 @@ input, select {
 
 .result-card {
     background-color: #f0fdfa;
-    border: 1px solid var(--primary-teal);
-    flex: 1 1 100%; /* Spans full width at bottom */
+    border: 2px solid var(--primary-teal);
+    flex: 1 1 100%; 
 }
 
 .res-item {
     display: flex;
     justify-content: space-between;
-    font-size: 0.85rem;
-    padding: 4px 0;
+    font-size: 0.9rem;
+    padding: 6px 0;
+    border-bottom: 1px dashed #b2dfdb;
+}
+
+.res-item:last-child {
+    border-bottom: none;
 }
 
 .calc-btn {
     background: var(--primary-teal);
     color: white;
     border: none;
-    padding: 12px;
+    padding: 15px;
     border-radius: 30px;
     font-weight: 700;
+    font-size: 1rem;
     cursor: pointer;
-    margin-top: 10px;
+    margin-top: 15px;
     width: 100%;
+}
+
+/* ========================================= */
+/* MOBILE RESPONSIVE MEDIA QUERY             */
+/* ========================================= */
+@media screen and (max-width: 650px) {
+    .card {
+        flex: 1 1 100%; /* Forces cards to stack vertically */
+    }
+    
+    .session3 > div {
+        flex: 1 1 100%; /* Forces internal solar inputs to stack */
+    }
+
+    header h1 {
+        font-size: 1.25rem; /* Slightly smaller title for small screens */
+    }
 }
