@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solar Sustenance Calculator - FY Project</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>SOLAR INSTALLATION SIZING CALCULATOR</h1>
+            <p>Okoh Emmanuella Itohan (ENG/COE/21002676) - Final Year Project 2026</p>
+        </header>
+
+        <div class="flex-layout">
+            <!-- Section 1: Load Profile -->
+            <section class="card">
+                <h2>LOAD PROFILE</h2>
+                <div class="input-group">
+                    <label>Continuous Load (W)</label>
+                    <input type="number" id="p_cont" value="1200">
+                </div>
+                <div class="input-group">
+                    <label>Intermittent Load (W)</label>
+                    <input type="number" id="p_int" value="800">
+                </div>
+                <div class="input-group">
+                    <label>Intermittent Runtime (Hrs/Day)</label>
+                    <input type="number" id="usage_hrs" value="4">
+                </div>
+            </section>
+
+            <!-- Section 2: Hardware -->
+            <section class="card">
+                <h2>SYSTEM PARAMS</h2>
+                <div class="input-group">
+                    <label>System Voltage (V)</label>
+                    <select id="v_sys">
+                        <option value="12">12V</option>
+                        <option value="24">24V</option>
+                        <option value="48" selected>48V</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Energy Storage (Battery Type)</label>
+                    <select id="batt_type">
+                        <option value="0.9">Lithium-Ion / LiFePO4</option>
+                        <option value="0.8">Lead-Acid / AGM / Gel</option>
+                        <option value="0.5">Deep Cycle Flood</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Battery Bank Capacity (kWh)</label>
+                    <input type="number" id="batt_kwh" value="5.12" step="0.01">
+                </div>
+            </section>
+
+            <!-- Section 3: Solar Input -->
+            <section class="card">
+                <h2>SOLAR INPUT</h2>
+                <div class="session3">
+                        <div>
+                            <div class="input-group">
+                                <label>Panel Type</label>
+                                <select id="panel_type">
+                                    <option value="1.12">Monocrystalline</option>
+                                    <option value="1.18">Polycrystalline</option>
+                                    <option value="1.18">Thin-Film</option>
+                                    <option value="1.08">N-Type/Bifacial</option>
+                                </select>
+                            </div>
+                                <div class="input-group">
+                                    <label>Panel Size (W)</label>
+                                    <select id="panel_watt">
+                                        <option value="50">50W</option>
+                                        <option value="70">70W</option>
+                                        <option value="100">100W</option>
+                                        <option value="150">150W</option>
+                                        <option value="160">160W</option>
+                                        <option value="200">200W</option>
+                                        <option value="250">250W</option>
+                                        <option value="300">300W</option>
+                                        <option value="350" selected>350W</option>
+                                        <option value="375">375W</option>
+                                        <option value="450">450W</option>
+                                        <option value="550">550W</option>
+                                    </select>
+                                </div>
+                        </div>
+                        <div>
+                            <div class="input-group">
+                                <label>Panel Operating Voltage (Vmp)</label>
+                                <select id="panel_OPV">
+                                    <option value="18">18V</option>
+                                    <option value="24">24</option>
+                                    <option value="35">35</option>
+                                    <option value="45" selected>45</option>
+                                    <option value="95">95</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Peak Sun Hours</label>
+                                <input type="number" id="psh" value="4.5">
+                            </div>
+                        </div>
+                </div>
+                <div class="input-group">
+                    <label>Charge Controller / Inverter Type</label>
+                    <select id="Charge_Range" onchange="calculateSustenance()">
+                        <!-- Value = Startup Voltage | data-max = Maximum Voc Limit -->
+                        <option value="15" data-max="50">Small PWM (5V - 50V)</option>
+                        <option value="30" data-max="100">Standard MPPT (10V - 120V)</option>
+                        <option value="60" data-max="150">Pro MPPT (30V - 150V)</option>
+                        <option value="120" data-max="450" selected>Hybrid Inverter (90V - 450V)</option>
+                        <option value="150" data-max="500">HV Hybrid (90V - 500V)</option>
+                    </select>
+                </div>
+            </section>
+
+            <!-- Section 4: Results -->
+            <section class="card result-card">
+                <h2>4. SUSTENANCE RESULTS</h2>
+                <div class="res-item"><span>Total Array Wattage:</span><strong id="res_array">--</strong></div>
+                <div class="res-item"><span>Connection:</span><strong id="res_conn">--</strong></div>
+                <div class="res-item"><span>Est. DC Voltage:</span><strong id="res_volt">--</strong></div>
+                <div class="res-item"><span>Charge Ctrl:</span><strong id="res_cc">--</strong></div>
+            </section>
+        </div>
+
+        <button onclick="calculateSustenance()" class="calc-btn">CALCULATE</button>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

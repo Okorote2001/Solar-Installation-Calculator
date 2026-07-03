@@ -1,0 +1,105 @@
+:root {
+    --primary-teal: #00bfa5;
+    --navy: #002b4e;
+    --white: #ffffff;
+}
+
+body, html {
+    height: 100vh;
+    margin: 0;
+    overflow: hidden; /* Prevents scrolling */
+    background-color: #f4f7f6;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app-container {
+    height: auto; /* Fits within 95% of screen height */
+    width: 95%;
+    max-width: 800px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Spreads content vertically */
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+header { text-align: center; margin-bottom: 5px; }
+header h1 { margin: 0; font-size: 1.5rem; color: var(--navy); }
+header p { margin: 2px 0; font-size: 0.8rem; color: #666; }
+
+.flex-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    flex: 1; /* Takes available space */
+}
+
+.card {
+    background: var(--white);
+    margin: .5rem 0;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    flex: 1 1 calc(50% - 20px);
+    box-sizing: border-box;
+}
+
+.session3 {
+    & div{
+        flex-grow: 1;
+    }
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 1%;
+    flex: 1; /* Takes available space */
+}
+
+.card h2 {
+    font-size: 0.7rem;
+    margin: 0 0 1% 0;
+    color: #999;
+    border-bottom: 1px solid #eee;
+}
+
+.input-group { margin-bottom: 8px; }
+
+label { font-size: 0.75rem; font-weight: 600; display: block; margin-bottom: 2px; }
+
+input, select {
+    width: 100%;
+    padding: 6px;
+    font-size: 0.85rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.result-card {
+    background-color: #f0fdfa;
+    border: 1px solid var(--primary-teal);
+    flex: 1 1 100%; /* Spans full width at bottom */
+}
+
+.res-item {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+    padding: 4px 0;
+}
+
+.calc-btn {
+    background: var(--primary-teal);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 30px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 100%;
+}
